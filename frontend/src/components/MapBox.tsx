@@ -86,4 +86,3 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
 };
 
 export default MapboxMap;
-export default MapboxMap;
