@@ -15,8 +15,8 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let map: any;
-    let marker: any;
+    let map: import('mapbox-gl').Map | undefined;
+    let marker: import('mapbox-gl').Marker | undefined;
 
     const loadMapbox = () => {
       if (window.mapboxgl) {
@@ -41,13 +41,12 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
       // Los Angeles coordinates (fallback)
       const coordinates: [number, number] = [-118.2437, 34.0522];
 
-      // Remove window.mapboxgl.accessToken assignment, only use accessToken in Map constructor
       map = new window.mapboxgl.Map({
         container: mapRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: coordinates,
         zoom: 15,
-        accessToken: mapboxToken // This is valid in mapbox-gl v3+
+        accessToken: mapboxToken
       });
 
       map.on('load', () => {
@@ -58,7 +57,7 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
               '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Office</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
             )
           )
-          .addTo(map);
+          .addTo(map!);
 
         const markerElement = marker.getElement();
         markerElement.style.cursor = 'pointer';
@@ -86,4 +85,5 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
   );
 };
 
+export default MapboxMap;
 export default MapboxMap;
