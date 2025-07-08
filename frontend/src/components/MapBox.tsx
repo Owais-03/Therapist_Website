@@ -41,12 +41,13 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
       // Los Angeles coordinates (fallback)
       const coordinates: [number, number] = [-118.2437, 34.0522];
 
+      // Remove window.mapboxgl.accessToken assignment, only use accessToken in Map constructor
       map = new window.mapboxgl.Map({
         container: mapRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: coordinates,
         zoom: 15,
-        accessToken: mapboxToken
+        accessToken: mapboxToken // This is valid in mapbox-gl v3+
       });
 
       map.on('load', () => {
@@ -54,12 +55,11 @@ const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) =>
           .setLngLat(coordinates)
           .setPopup(
             new window.mapboxgl.Popup().setHTML(
-              '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Clinic</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
+              '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Office</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
             )
           )
           .addTo(map);
 
-        // Set pointer cursor on marker hover
         const markerElement = marker.getElement();
         markerElement.style.cursor = 'pointer';
       });
