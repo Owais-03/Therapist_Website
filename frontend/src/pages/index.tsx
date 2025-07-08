@@ -1,6 +1,6 @@
 import CounterButton from "../components/CounterButton";
 import MapboxMap from "../components/MapBox";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useMotionValue, useAnimationFrame } from "framer-motion";
 import { testimonials } from "../data/testimonials";
 import Image from "next/image";
@@ -11,12 +11,15 @@ export default function Home() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
 
-  const rollingTexts = [
-    "I want to work with you for Greater Purpose in Your Life Direction",
-    "Testimonials from 500+ satisfied clients",
-    "Media Mentions and Professional Recognition",
-    "Start Healing Today with Evidence-Based Therapy",
-  ];
+  const rollingTexts = useMemo(
+    () => [
+      "I want to work with you for Greater Purpose in Your Life Direction",
+      "Testimonials from 500+ satisfied clients",
+      "Media Mentions and Professional Recognition",
+      "Start Healing Today with Evidence-Based Therapy",
+    ],
+    []
+  );
 
   useEffect(() => {
     // Simple text rotation effect

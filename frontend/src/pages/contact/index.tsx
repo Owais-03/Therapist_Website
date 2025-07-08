@@ -181,7 +181,7 @@ function Contact() {
                       onBlur={formik.handleBlur}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3bb6b0] focus:border-[#3bb6b0]"
                       rows={4}
-                      placeholder="Tell us about your needs and what you're hoping to achieve..."
+                      placeholder="Tell us about your needs and what you&apos;re hoping to achieve..."
                     />
                   </label>
                   {formik.touched.reason && formik.errors.reason && (
