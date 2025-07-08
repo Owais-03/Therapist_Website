@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Disable text selection globally */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Re-enable text selection for form inputs and textareas */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Rolling text animation */
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-2rem);
+  }
+  50% {
+    transform: translateY(-4rem);
+  }
+  75% {
+    transform: translateY(-6rem);
+  }
+  100% {
+    transform: translateY(-8rem);
+  }
+}
+
+@media (min-width: 768px) {
+  @keyframes scroll-vertical {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-2.5rem);
+    }
+    50% {
+      transform: translateY(-5rem);
+    }
+    75% {
+      transform: translateY(-7.5rem);
+    }
+    100% {
+      transform: translateY(-10rem);
+    }
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical 8s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.animate-scroll-vertical:hover {
+  animation-play-state: paused;
+}
+
+/* Ticket card styling */
+.ticket-card {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(59, 182, 176, 0.1);
+}
+
+.ticket-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Add a subtle pattern to the background of the testimonials section */
+#testimonial {
+  background-color: #f7f7fa;
+  background-image: radial-gradient(#3bb6b0 0.5px, transparent 0.5px), radial-gradient(#3bb6b0 0.5px, #f7f7fa 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  background-attachment: fixed;
+  position: relative;
+}
+
+#testimonial::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(247, 247, 250, 0.9), rgba(247, 247, 250, 0.9));
+  z-index: 0;
+}
+
+#testimonial > * {
+  position: relative;
+  z-index: 1;
+}
