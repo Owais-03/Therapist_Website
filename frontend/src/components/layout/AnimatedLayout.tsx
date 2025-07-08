@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function AnimatedLayout({ children }) {
+export default function AnimatedLayout(props){
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -15,7 +15,7 @@ export default function AnimatedLayout({ children }) {
           transition={{ duration: 0.5 }}
           className="flex-1"
         >
-          {children}
+          {props.children}
         </motion.main>
       </AnimatePresence>
       <Footer />
