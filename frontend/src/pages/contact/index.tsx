@@ -113,7 +113,7 @@ function Contact() {
             <div className="border-7 border-dashted border-[#EEE5BF] bg-white rounded-2xl shadow-lg p-8">
               <h1 className="text-3xl font-bold text-[#3bb6b0] mb-2 text-center">Contact Us</h1>
               <p className="text-[#2a2e4b] text-center mb-8">
-                Ready to start your journey? Fill out the form below and we'll get back to you within 24 hours.
+                Ready to start your journey? Fill out the form below and we&apos;ll get back to you within 24 hours.
               </p>
               
               <form onSubmit={formik.handleSubmit} noValidate className="space-y-6">
