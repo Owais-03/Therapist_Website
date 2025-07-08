@@ -477,7 +477,6 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row gap-6 items-stretch">
               <div className="flex-1 min-h-[250px] md:min-h-[300px]">
                 <MapboxMap
-                  address="1287 Maplewood Drive, Los Angeles, CA 90026"
                   className="h-full"
                 />
               </div>

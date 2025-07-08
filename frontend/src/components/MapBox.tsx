@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
 interface MapboxMapProps {
-  address?:string;
   className?: string;
 }
 
@@ -12,7 +11,6 @@ declare global {
 }
 
 const MapboxMap: React.FC<MapboxMapProps> = ({
-  address = "",
   className = ""
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -75,4 +73,5 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
 };
 
 export default MapboxMap;
+
 
