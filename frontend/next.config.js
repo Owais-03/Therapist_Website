@@ -5,9 +5,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'randomuser.me',
+        port: '',
         pathname: '/api/portraits/**',
       },
     ],
+    domains: ['randomuser.me'],
   },
   reactStrictMode: true,
   eslint: {
