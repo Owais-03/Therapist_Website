@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -97,10 +98,13 @@ export default function Header() {
                     >
                         <Link href="/" legacyBehavior>
                             <a className="flex-shrink-0">
-                                <img
-                                    src="../../logo.png"
+                                <Image
+                                    src="/logo.png"
                                     alt="Grow My Therapy Logo"
+                                    width={60}
+                                    height={84}
                                     className="h-21 w-15 mr-5 md:h-27 md:w-21"
+                                    priority
                                 />
                             </a>
                         </Link>

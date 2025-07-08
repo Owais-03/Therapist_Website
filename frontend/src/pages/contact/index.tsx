@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Image from 'next/image';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -51,10 +52,13 @@ function Contact() {
             {/* Left Side - Dr. Profile */}
             <div className="bg-[#EEE5BF] rounded-2xl shadow-lg p-8">
               <div className="text-center mb-6">
-                <img
-                  src="../../dr_serena.jpg"
+                <Image
+                  src="/dr_serena.jpg"
                   alt="Dr. Serena Blake"
+                  width={192}
+                  height={192}
                   className="w-48 h-48 mx-auto object-cover rounded-full border-4 border-[#3bb6b0] mb-4"
+                  priority
                 />
                 <h2 className="text-2xl font-bold text-[#023c40] mb-2">
                   Dr. Serena Blake, PsyD
@@ -218,7 +222,7 @@ function Contact() {
                       />
                     </div>
                     <span id="agree-description" className="text-[#2a2e4b] text-sm">
-                      I agree to be contacted by Dr. Serena Blake's office regarding my inquiry. 
+                      I agree to be contacted by Dr. Serena Blake&apos;s office regarding my inquiry. 
                       I understand that this form is not for emergency situations.
                     </span>
                   </label>

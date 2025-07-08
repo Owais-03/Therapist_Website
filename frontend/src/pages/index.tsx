@@ -2,7 +2,8 @@ import CounterButton from "../components/CounterButton";
 import MapboxMap from "../components/MapBox";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useAnimationFrame } from "framer-motion";
-import { testimonials } from "../data/testimonials"
+import { testimonials } from "../data/testimonials";
+import Image from "next/image";
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -23,12 +24,12 @@ export default function Home() {
       setCurrentTextIndex((prev) => (prev + 1) % rollingTexts.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [rollingTexts.length]);
 
   useEffect(() => {
     // Update the displayed text when currentTextIndex changes
     setDisplayText(rollingTexts[currentTextIndex]);
-  }, [currentTextIndex]);
+  }, [currentTextIndex, rollingTexts]);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -142,7 +143,7 @@ export default function Home() {
   useEffect(() => {
     row1X.set(row1LastX.current);
     row2X.set(row2LastX.current);
-  }, [pauseAnimation]);
+  }, [pauseAnimation, row1X, row2X]);
 
   return (
     <motion.div
@@ -404,9 +405,11 @@ export default function Home() {
       <div className="flex justify-center" id="about">
         <div className="bg-[#023c40] shadow-[0_2px_8px_rgba(42,46,75,0.08)] p-8 w-full">
           <div className="flex flex-col lg:flex-row gap-8 mb-8">
-            <img
-              src="../../dr_serena.jpg"
+            <Image
+              src="/dr_serena.jpg"
               alt="Dr. Serena Blake"
+              width={400}
+              height={500}
               className="w-full lg:w-[25rem] h-[30rem] object-cover rounded-2xl flex-shrink-0"
             />
             <div className="flex-1 flex flex-col justify-between">
@@ -421,9 +424,9 @@ export default function Home() {
                   Dr. Serena Blake is a licensed clinical psychologist (PsyD)
                   based in Los Angeles, CA, with eight years of experience and
                   over 500 client sessions. She blends evidence-based
-                  approaches—like cognitive-behavioral therapy and
-                  mindfulness—with compassionate, personalized care to help you
-                  overcome anxiety, strengthen relationships, and heal from
+                  approaches&mdash;like cognitive-behavioral therapy and
+                  mindfulness&mdash;with compassionate, personalized care to help
+                  you overcome anxiety, strengthen relationships, and heal from
                   trauma. Whether you meet in her Maplewood Drive office or
                   connect virtually via Zoom, Dr. Blake is committed to creating
                   a safe, supportive space for you to thrive.
@@ -583,10 +586,13 @@ export default function Home() {
                   {/* Ticket top section */}
                   <div className="relative p-5 bg-gradient-to-r from-[#023c40]/90 to-[#3bb6b0]/90">
                     <div className="flex items-center gap-3">
-                      <img
+                      <Image
                         src={testimonial.photo}
                         alt={testimonial.name}
+                        width={64}
+                        height={64}
                         className="w-16 h-16 rounded-full border-2 border-white shadow-md object-cover"
+                        priority={index < 2}
                       />
                       <div className="text-white">
                         <h3 className="font-medium text-lg">
@@ -607,7 +613,7 @@ export default function Home() {
                   {/* Ticket bottom section */}
                   <div className="p-5 pt-6">
                     <div className="text-gray-700 italic text-sm mb-3">
-                      "{testimonial.text}"
+                      &quot;{testimonial.text}&quot;
                     </div>
                     <div className="text-xs text-gray-500 flex justify-between items-center">
                       <span>Client since 2023</span>
@@ -635,10 +641,13 @@ export default function Home() {
                   {/* Ticket top section */}
                   <div className="relative p-5 bg-gradient-to-r from-[#3bb6b0]/90 to-[#023c40]/90">
                     <div className="flex items-center gap-3">
-                      <img
+                      <Image
                         src={testimonial.photo}
                         alt={testimonial.name}
+                        width={64}
+                        height={64}
                         className="w-16 h-16 rounded-full border-2 border-white shadow-md object-cover"
+                        priority={index < 2}
                       />
                       <div className="text-white">
                         <h3 className="font-medium text-lg">
@@ -659,7 +668,7 @@ export default function Home() {
                   {/* Ticket bottom section */}
                   <div className="p-5 pt-6">
                     <div className="text-gray-700 italic text-sm mb-3">
-                      "{testimonial.text}"
+                      &quot;{testimonial.text}&quot;
                     </div>
                     <div className="text-xs text-gray-500 flex justify-between items-center">
                       <span>Client since 2022</span>

@@ -15,20 +15,16 @@ const CounterButton: React.FC<CounterButtonProps> = ({
     className = '',
 }) => {
     const [count, setCount] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
-    const [shouldStart, setShouldStart] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    setIsVisible(true);
                     // Start counter after 1 second delay
-                    setTimeout(() => setShouldStart(true), 1000);
+                    setTimeout(() => setCount(0), 0); // Reset before start
+                    setTimeout(() => setCount(value), 1000);
                 } else {
-                    setIsVisible(false);
-                    setShouldStart(false);
                     setCount(0); // Reset counter when out of view
                 }
             },
@@ -40,9 +36,10 @@ const CounterButton: React.FC<CounterButtonProps> = ({
         }
 
         return () => observer.disconnect();
-    }, []);
+    }, [value]);
 
     useEffect(() => {
+        if (count === 0 || count === value) return;
         const timer = setTimeout(() => {
             if (count < value) {
                 setCount((prev) => Math.min(prev + Math.max(1, Math.floor(value / 20)), value));

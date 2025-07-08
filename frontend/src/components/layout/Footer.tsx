@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function Footer() {
+function Footer() {
   return (
     <motion.footer 
       initial={{ opacity: 0 }}
@@ -21,11 +23,14 @@ export default function Footer() {
             className="md:col-span-1"
           >
             <div className="flex items-center mb-4">
-              <img
-                src="../../logo.png"
+              <Image
+                src="/logo.png"
                 alt="Arogya Therapy Wellness Clinic Logo"
+                width={48}
+                height={64}
                 className="h-16 w-12 mr-3"
                 style={{ filter: 'brightness(0) saturate(100%) invert(93%) sepia(5%) saturate(1171%) hue-rotate(13deg) brightness(96%) contrast(92%)' }}
+                priority
               />
               <div>
                 <h3 className="text-lg font-bold text-[#EEE5BF]">
@@ -69,22 +74,22 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 hover:text-[#3bb6b0] transition-colors duration-300">Quick Links</h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Home</a>
+                <Link href="/" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Home</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/services" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Services</a>
+                <Link href="/services" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Services</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/#about" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">About</a>
+                <Link href="/#about" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">About</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/#testimonial" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Testimonial</a>
+                <Link href="/#testimonial" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Testimonial</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/#faq" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">FAQ & Prices</a>
+                <Link href="/#faq" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">FAQ & Prices</Link>
               </motion.li>
               <motion.li whileHover={{ x: 5 }}>
-                <a href="/contact" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Contact</a>
+                <Link href="/contact" className="hover:text-[#3bb6b0] hover:underline transition-all duration-300 hover:pl-2">Contact</Link>
               </motion.li>
             </ul>
           </motion.div>
@@ -124,4 +129,6 @@ export default function Footer() {
       </div>
     </motion.footer>
   );
-}
+};
+
+export default Footer;

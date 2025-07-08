@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
 interface MapboxMapProps {
-  address?: string;
+  address?:string
   className?: string;
 }
 
-const MapboxMap: React.FC<MapboxMapProps> = ({ 
-  address = "1287 Maplewood Drive, Los Angeles, CA 90026",
+const MapboxMap: React.FC<MapboxMapProps> = ({
+  address="",
   className = ""
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -14,7 +14,7 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
 
   useEffect(() => {
     const loadMapbox = () => {
-      if (window.mapboxgl) {
+      if ((window as any).mapboxgl) {
         initializeMap();
         return;
       }
@@ -33,14 +33,14 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
     };
 
     const initializeMap = () => {
-      if (!mapRef.current || !window.mapboxgl) return;
+      if (!mapRef.current || !(window as any).mapboxgl) return;
 
-      window.mapboxgl.accessToken = mapboxToken;
+      (window as any).mapboxgl.accessToken = mapboxToken;
 
       // Los Angeles coordinates (fallback)
       const coordinates = [-118.2437, 34.0522]; // [lng, lat]
 
-      const map = new window.mapboxgl.Map({
+      const map = new (window as any).mapboxgl.Map({
         container: mapRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: coordinates,
@@ -48,17 +48,17 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
       });
 
       // Add marker
-      new window.mapboxgl.Marker({ color: '#3bb6b0' })
+      new (window as any).mapboxgl.Marker({ color: '#3bb6b0' })
         .setLngLat(coordinates)
         .setPopup(
-          new window.mapboxgl.Popup().setHTML(
-            '<div style="padding: 8px;"><strong>Dr. Serena Blake\'s Office</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
+          new (window as any).mapboxgl.Popup().setHTML(
+            '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Office</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
           )
         )
         .addTo(map);
 
       // Add navigation controls
-      map.addControl(new window.mapboxgl.NavigationControl());
+      map.addControl(new (window as any).mapboxgl.NavigationControl());
     };
 
     loadMapbox();
@@ -74,12 +74,5 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
     </div>
   );
 };
-
-// Extend the Window interface to include mapboxgl
-declare global {
-  interface Window {
-    mapboxgl: any;
-  }
-}
 
 export default MapboxMap;
