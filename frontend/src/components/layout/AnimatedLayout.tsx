@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function AnimatedLayout(props: PropsWithChildren<{}>) {
+export default function AnimatedLayout(props: PropsWithChildren<object>) {
   return (
     <div className="min-h-screen bg-white">
       <Header />
