@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function AnimatedLayout(props){
+export default function AnimatedLayout(props: PropsWithChildren<{}>) {
   return (
     <div className="min-h-screen bg-white">
       <Header />
