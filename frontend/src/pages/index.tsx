@@ -477,6 +477,7 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row gap-6 items-stretch">
               <div className="flex-1 min-h-[250px] md:min-h-[300px]">
                 <MapboxMap
+                  mapboxToken="pk.eyJ1IjoiZmVyb3owMyIsImEiOiJjbThuYWRkY2wwM3B0MmtzNTAzOTBlNzhkIn0.hDr015g1tBkgheb3jMc8ow"
                   className="h-full"
                 />
               </div>

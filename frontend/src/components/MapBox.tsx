@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 interface MapboxMapProps {
   className?: string;
+  mapboxToken: string;
 }
 
 declare global {
@@ -10,13 +11,13 @@ declare global {
   }
 }
 
-const MapboxMap: React.FC<MapboxMapProps> = ({
-  className = ""
-}) => {
+const MapboxMap: React.FC<MapboxMapProps> = ({ className = "", mapboxToken }) => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapboxToken = "pk.eyJ1IjoiZmVyb3owMyIsImEiOiJjbThuYWRkY2wwM3B0MmtzNTAzOTBlNzhkIn0.hDr015g1tBkgheb3jMc8ow";
 
   useEffect(() => {
+    let map: any;
+    let marker: any;
+
     const loadMapbox = () => {
       if (window.mapboxgl) {
         initializeMap();
@@ -27,38 +28,51 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
       script.src = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js';
       script.onload = initializeMap;
       document.head.appendChild(script);
+
+      const link = document.createElement('link');
+      link.href = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
     };
 
     const initializeMap = () => {
       if (!mapRef.current || !window.mapboxgl) return;
 
-      window.mapboxgl.accessToken = mapboxToken;
-
       // Los Angeles coordinates (fallback)
       const coordinates: [number, number] = [-118.2437, 34.0522];
 
-      const map = new window.mapboxgl.Map({
+      map = new window.mapboxgl.Map({
         container: mapRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: coordinates,
-        zoom: 15
+        zoom: 15,
+        accessToken: mapboxToken
       });
 
-      // Add marker
-      new window.mapboxgl.Marker({ color: '#3bb6b0' })
-        .setLngLat(coordinates)
-        .setPopup(
-          new window.mapboxgl.Popup().setHTML(
-            '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Office</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
+      map.on('load', () => {
+        marker = new window.mapboxgl.Marker({ color: '#3bb6b0' })
+          .setLngLat(coordinates)
+          .setPopup(
+            new window.mapboxgl.Popup().setHTML(
+              '<div style="padding: 8px;"><strong>Dr. Serena Blake&apos;s Clinic</strong><br/>1287 Maplewood Drive<br/>Los Angeles, CA 90026</div>'
+            )
           )
-        )
-        .addTo(map);
+          .addTo(map);
 
-      // Add navigation controls
+        // Set pointer cursor on marker hover
+        const markerElement = marker.getElement();
+        markerElement.style.cursor = 'pointer';
+      });
+
       map.addControl(new window.mapboxgl.NavigationControl());
     };
 
     loadMapbox();
+
+    return () => {
+      if (marker) marker.remove();
+      if (map) map.remove();
+    };
   }, [mapboxToken]);
 
   return (
@@ -73,5 +87,3 @@ const MapboxMap: React.FC<MapboxMapProps> = ({
 };
 
 export default MapboxMap;
-
-
